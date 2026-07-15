@@ -1,5 +1,5 @@
 const DEFAULT_TO_EMAIL = 'contato@upscrum.com.br';
-const DEFAULT_FROM_EMAIL = 'Upscrum <onboarding@resend.dev>';
+const DEFAULT_FROM_EMAIL = 'Upscrum <contato@upscrum.com.br>';
 
 function escapeHtml(value) {
   return String(value)
@@ -62,7 +62,17 @@ export default async function handler(req, res) {
   });
 
   if (!resendResponse.ok) {
-    return res.status(502).json({ error: 'Email provider error' });
+    const providerError = await resendResponse.text();
+    console.error('Resend email error', {
+      status: resendResponse.status,
+      body: providerError
+    });
+
+    return res.status(502).json({
+      error: 'Email provider error',
+      providerStatus: resendResponse.status,
+      providerMessage: providerError
+    });
   }
 
   return res.status(200).json({ ok: true });
