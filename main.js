@@ -22,7 +22,9 @@ window.addEventListener('scroll', () => {
 });
 
 // Contact form submit
-async function handleSubmit(e) {
+const contactForm = document.getElementById('contactForm');
+
+contactForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.target;
   const button = form.querySelector('.btn-submit');
@@ -61,7 +63,7 @@ async function handleSubmit(e) {
     button.textContent = originalText;
     button.disabled = false;
   }
-}
+});
 
 // Intersection observer for fade-in animations
 const observer = new IntersectionObserver((entries) => {
