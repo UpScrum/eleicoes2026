@@ -21,13 +21,46 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Contact form mock submit
-function handleSubmit(e) {
+// Contact form submit
+async function handleSubmit(e) {
   e.preventDefault();
+  const form = e.target;
+  const button = form.querySelector('.btn-submit');
   const success = document.getElementById('formSuccess');
-  success.classList.add('show');
-  e.target.querySelector('.btn-submit').textContent = 'Enviado! ✓';
-  e.target.querySelector('.btn-submit').disabled = true;
+  const originalText = button.textContent;
+  const formData = new FormData(form);
+
+  success.classList.remove('show');
+  success.classList.remove('error');
+  button.textContent = 'Enviando...';
+  button.disabled = true;
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Falha no envio');
+    }
+
+    success.textContent = 'Mensagem enviada! Nossa equipe entrará em contato em breve.';
+    success.classList.add('show');
+    button.textContent = 'Enviado!';
+    form.reset();
+  } catch (error) {
+    success.textContent = 'Não foi possível enviar a mensagem. Tente novamente em alguns minutos.';
+    success.classList.add('error');
+    success.classList.add('show');
+    button.textContent = originalText;
+    button.disabled = false;
+  }
 }
 
 // Intersection observer for fade-in animations

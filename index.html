@@ -359,49 +359,22 @@
               <span class="info-icon">📧</span>
               <a href="mailto:contato@upscrum.com.br">contato@upscrum.com.br</a>
             </div>
-            <div class="info-item">
-              <span class="info-icon">💬</span>
-              <a href="https://wa.me/5511999999999" target="_blank">WhatsApp: (11) 9 9999-9999</a>
-            </div>
           </div>
         </div>
         <form class="contact-form" onsubmit="handleSubmit(event)">
           <div class="form-row">
             <div class="form-group">
               <label>Nome completo</label>
-              <input type="text" placeholder="Seu nome" required />
+              <input type="text" name="name" placeholder="Seu nome" required />
             </div>
-            <div class="form-group">
-              <label>Cargo / Função</label>
-              <input type="text" placeholder="Ex: Coordenador de campanha" required />
-            </div>
-          </div>
-          <div class="form-row">
             <div class="form-group">
               <label>E-mail</label>
-              <input type="email" placeholder="seu@email.com" required />
+              <input type="email" name="email" placeholder="seu@email.com" required />
             </div>
-            <div class="form-group">
-              <label>WhatsApp</label>
-              <input type="tel" placeholder="(11) 9 0000-0000" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Cargo em disputa</label>
-            <select required>
-              <option value="">Selecione...</option>
-              <option>Vereador</option>
-              <option>Deputado Estadual</option>
-              <option>Deputado Federal</option>
-              <option>Senador</option>
-              <option>Governador</option>
-              <option>Presidente da República</option>
-              <option>Partido / Coordenação</option>
-            </select>
           </div>
           <div class="form-group">
             <label>Como podemos ajudar?</label>
-            <textarea placeholder="Conte-nos sobre sua campanha e o que você precisa..." rows="4"></textarea>
+            <textarea name="message" placeholder="Conte-nos sobre sua campanha e o que você precisa..." rows="4" required></textarea>
           </div>
           <button type="submit" class="btn-submit">
             Solicitar proposta gratuita →
@@ -453,7 +426,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Upscrum. Todos os direitos reservados. CNPJ: XX.XXX.XXX/0001-XX</p>
+        <p>© 2026 Upscrum. Todos os direitos reservados.</p>
         <p>Em conformidade com a Resolução TSE nº 23.755/2026 e Lei nº 9.504/1997</p>
       </div>
     </div>

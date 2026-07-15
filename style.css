@@ -710,6 +710,11 @@ body {
   font-weight: 500;
 }
 .form-success.show { display: block; }
+.form-success.error {
+  color: #991B1B;
+  background: #FEE2E2;
+  border-color: #FECACA;
+}
 
 /* =====================
    FOOTER
