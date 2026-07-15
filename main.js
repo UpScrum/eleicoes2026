@@ -44,6 +44,7 @@ contactForm?.addEventListener('submit', async (e) => {
       body: JSON.stringify({
         name: formData.get('name'),
         email: formData.get('email'),
+        whatsapp: formData.get('whatsapp'),
         message: formData.get('message')
       })
     });

@@ -26,6 +26,7 @@ export default async function handler(req, res) {
 
   const name = String(req.body?.name || '').trim();
   const email = String(req.body?.email || '').trim();
+  const whatsapp = String(req.body?.whatsapp || '').trim();
   const message = String(req.body?.message || '').trim();
 
   if (!name || !email || !message || !isValidEmail(email)) {
@@ -34,6 +35,7 @@ export default async function handler(req, res) {
 
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
+  const safeWhatsapp = whatsapp ? escapeHtml(whatsapp) : 'Não informado';
   const safeMessage = escapeHtml(message).replace(/\n/g, '<br>');
 
   const resendResponse = await fetch('https://api.resend.com/emails', {
@@ -51,10 +53,11 @@ export default async function handler(req, res) {
         <h2>Novo contato pelo site</h2>
         <p><strong>Nome:</strong> ${safeName}</p>
         <p><strong>E-mail:</strong> ${safeEmail}</p>
+        <p><strong>WhatsApp:</strong> ${safeWhatsapp}</p>
         <p><strong>Mensagem:</strong></p>
         <p>${safeMessage}</p>
       `,
-      text: `Novo contato pelo site\n\nNome: ${name}\nE-mail: ${email}\n\nMensagem:\n${message}`
+      text: `Novo contato pelo site\n\nNome: ${name}\nE-mail: ${email}\nWhatsApp: ${whatsapp || 'Não informado'}\n\nMensagem:\n${message}`
     })
   });
 
